@@ -34,17 +34,20 @@ const App = () => {
             setTimeout(() => {setMessage(null)}, 3000)
           })
            .catch((error) => {
+            console.log(error.response.data)
             console.log(error)
             setPeople(people.filter(person => person.id !== updatedPerson.id))
             setNewName('')
             setNewNumber('')
             setMessage(
+              console.log(error.response.data)
               `[ERROR] ${updatedPerson.name} was already deleted from server`
             )
             setTimeout(() => {
               setMessage(null)
             }, 5000)
           })
+          .catch((error) => setMessage(error.response.data.error));
         }
       } else {
         const x = {
@@ -60,6 +63,7 @@ const App = () => {
           setMessage(`${newName} was added`)
           setTimeout(() => {setMessage(null)}, 5000)
         })
+        .catch((error) => setMessage(error.response.data.error));
       }
   }
 
